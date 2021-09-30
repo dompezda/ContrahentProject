@@ -1,0 +1,71 @@
+<h5> Dane personalne</h5>
+<div class="row mt-4"></div>
+<div class="row form-group">
+    <label class="col-sm-2 col-form-label">Imię</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" [(ngModel)]="FirstName" placeholder="Wpisz imię">
+    </div>
+    <label class="col-sm-2 col-form-label">Nazwisko</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" [(ngModel)]="Surname" placeholder="Wpisz nazwisko">
+    </div>
+</div>
+<div class="row mt-3"></div>
+<div class="row form-group">
+    <label class="col-sm-2 col-form-label">REGON</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" [(ngModel)]="REGON" placeholder="Podaj REGON">
+    </div>
+    <label class="col-sm-2 col-form-label">NIP</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" [(ngModel)]="NIP" placeholder="Podaj NIP">
+    </div>
+</div>
+<div class="row mt-3"></div>
+<div class="row form-group">
+    <label class="col-sm-6 col-form-label text-center">Numer kontaktowy</label>
+    <div class="col-sm-6">
+        <input type="text" class="form-control " [(ngModel)]="ContactNumber" placeholder="Podaj numer kontaktowy">
+    </div>
+</div>
+<div class="row mt-4 mb-4"></div>
+<h5> Dane adresowe</h5>
+<div class="row mt-4"></div>
+<div class="row form-group">
+    <label class="col-sm-2 col-form-label">Kraj</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" [(ngModel)]="Country" placeholder="Wpisz kraj">
+    </div>
+    <label class="col-sm-2 col-form-label">Miasto</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" [(ngModel)]="City" placeholder="Wpisz miasto">
+    </div>
+</div>
+<div class="row mt-3"></div>
+<div class="row form-group">
+    <label class="col-sm-2 col-form-label">Kod pocztowy</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" [(ngModel)]="PostalCode" placeholder="Wpisz kod">
+    </div>
+    <label class="col-sm-2 col-form-label">Ulica</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" [(ngModel)]="Street" placeholder="Wpisz ulicę">
+    </div>
+</div>
+<div class="row mt-3"></div>
+<div class="row form-group">
+    <label class="col-sm-6 col-form-label text-center">Nr domu/lokalu</label>
+    <div class="col-sm-6">
+        <input type="text" class="form-control" [(ngModel)]="HomeNumber" placeholder="Wpisz numer lokalu/domu">
+    </div>
+</div>
+
+  
+
+
+<button (click)="addCont()" *ngIf="cont.ContractorId==0" class="btn btn-primary">
+    Dodaj
+</button>
+<button (click)="editCont()" *ngIf="cont.ContractorId!=0" class="btn btn-primary">
+    Edytuj
+</button>
