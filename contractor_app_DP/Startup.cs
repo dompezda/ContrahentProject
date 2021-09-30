@@ -29,7 +29,7 @@ namespace contractor_app_DP
             {
                 c.AddPolicy("AllowOrigin", options => options.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader());
             });
-            services.AddContrahentrollersWithViews()
+            services.AddControllersWithViews()
                 .AddNewtonsoftJson(options=>
                 options.SerializerSettings.ReferenceLoopHandling=Newtonsoft
                 .Json.ReferenceLoopHandling.Ignore)
