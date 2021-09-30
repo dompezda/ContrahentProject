@@ -6,7 +6,7 @@ import {SharedService} from 'src/app/shared.service';
   templateUrl: './add-edit-cont.component.html',
   styleUrls: ['./add-edit-cont.component.css']
 })
-export class AddEditContComponent implements OnInit {
+export class AddeditContreahentComponent implements OnInit {
 
   constructor(private service:SharedService) { }
 
@@ -38,7 +38,7 @@ export class AddEditContComponent implements OnInit {
     this.HomeNumber=this.cont.HomeNumber;
   }
 
-  addCont(){
+  AddContrahent(){
 
     var value ={
       ContractorId:this.ContractorId,
@@ -53,12 +53,12 @@ export class AddEditContComponent implements OnInit {
       PostalCode:this.PostalCode,
       ContactNumber:this.ContactNumber
     };
-    this.service.addCont(value).subscribe(res=>{
+    this.service.AddContrahent(value).subscribe(res=>{
       alert(res.toString());
     });
   }
   
-  editCont(){
+  editContreahent(){
     var value ={
       ContractorId:this.ContractorId,
       FirstName:this.FirstName,
@@ -72,7 +72,7 @@ export class AddEditContComponent implements OnInit {
       PostalCode:this.PostalCode,
       ContactNumber:this.ContactNumber
     };
-    this.service.updateCont(value).subscribe(res=>{
+    this.service.UpdateContrahent(value).subscribe(res=>{
       alert(res.toString());
     });
   }

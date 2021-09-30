@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContractorComponent } from './contractor/contractor.component';
 import { ShowContComponent } from './contractor/show-cont/show-cont.component';
-import { AddEditContComponent } from './contractor/add-edit-cont/add-edit-cont.component';
+import { AddeditContreahentComponent } from './contractor/add-edit-cont/add-edit-cont.component';
 import { AddressComponent } from './address/address.component';
 import { ShowAddressComponent } from './address/show-address/show-address.component';
 import { AddEditAddressComponent } from './address/add-edit-address/add-edit-address.component';
@@ -19,7 +19,7 @@ import {FormsModule,ReactiveFormsModule} from '@angular/forms'
     AppComponent,
     ContractorComponent,
     ShowContComponent,
-    AddEditContComponent,
+    AddeditContreahentComponent,
     AddressComponent,
     ShowAddressComponent,
     AddEditAddressComponent

@@ -10,12 +10,9 @@ namespace contractor_app_DP
 {
     public class ContractortDbContext : DbContext
     {
-        //private readonly ContrahentDbContext GetContext;
+
         public DbSet<RegisterModel> Contractors { get; set; }
-        //public ContractortDbContext(DbContextOptions<ContractortDbContext> options) :base(options)
-        //{
-          
-        //}
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

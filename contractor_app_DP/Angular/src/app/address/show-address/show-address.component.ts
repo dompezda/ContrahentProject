@@ -11,7 +11,7 @@ export class ShowAddressComponent implements OnInit {
 
   ContractorList:any=[];
   ModalTitle:string="";
-  ActiveAddEditContComp:boolean=false;
+  ActiveAddeditContreahentComp:boolean=false;
   cont:any;
 
 
@@ -34,7 +34,7 @@ addClick(){
     HomeNumber:"",
   }
   this.ModalTitle="Dodaj nowego klienta";
-  this.ActiveAddEditContComp=true;
+  this.ActiveAddeditContreahentComp=true;
 }
 
 
@@ -42,17 +42,17 @@ addClick(){
 editClick(item:any){
   this.cont=item;
   this.ModalTitle="Edycja istniejącego klienta";
-  this.ActiveAddEditContComp=true;
+  this.ActiveAddeditContreahentComp=true;
 }
 
 closeClick(){
-this.ActiveAddEditContComp=false;
+this.ActiveAddeditContreahentComp=false;
 this.refreshContList();
 }
 
 deleteClick(item:any){
   if(confirm("Czy na pewno chcesz usnąć obiekt z identyfikatorem "+item)){
-    this.service.deleteCont(item).subscribe(data=>{
+    this.service.DeleteContrahent(item).subscribe(data=>{
       alert(data.toString());
       this.refreshContList();
     })

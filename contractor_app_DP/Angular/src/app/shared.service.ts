@@ -18,27 +18,14 @@ getContList():Observable<any[]>{
     return this.http.get<any>(this.APIUrl+'/Contractor');
 }
 
-addCont(val:any){
+AddContrahent(val:any){
   return this.http.post(this.APIUrl+'/Contractor',val);
 }
-updateCont(val:any){
+UpdateContrahent(val:any){
   return this.http.put(this.APIUrl+'/Contractor',val);
 }
-deleteCont(val:any){
+DeleteContrahent(val:any){
   return this.http.delete(this.APIUrl+'/Contractor/'+val);
 }
 
-// getAddressList():Observable<any[]>{
-//   return this.http.get<any>(this.APIUrl+'/Address');
-// }
-// addAddress(val:any){
-// return this.http.post(this.APIUrl+'/Address',val);
-// }
-// updateAddress(val:any){
-// return this.http.put(this.APIUrl+'/Address',val);
-// }
-// deleteAddress(val:any){
-// return this.http.delete(this.APIUrl+'/Address/'+val);
-// }
-//get all dep names??
 }
