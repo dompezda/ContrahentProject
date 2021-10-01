@@ -8,10 +8,10 @@ The Contrahent Projekt is application builded from 3 pieces:
   ![image](https://user-images.githubusercontent.com/32547421/135588078-7f25d42f-9938-48ea-a756-e0f32da045b8.png)
   ![image](https://user-images.githubusercontent.com/32547421/135588121-262064a9-3126-468d-81a9-0671ad117e6d.png)
   <br>
-  b) adding new data (modal window)<br>
+  b) adding new data - modal window that enable to add new data to database<br>
   ![image](https://user-images.githubusercontent.com/32547421/135588340-5a3cd8b5-ba59-4c3f-9968-9fc455380ac1.png)
   <br>
-  c) editing existing data<br>
+  c) editing existing data - modal windows that enable to edit existing data from database:<br>
   ![image](https://user-images.githubusercontent.com/32547421/135588392-a0ccaf31-f3b8-4e1e-85d7-40265db6a914.png)
 
 Before running app:<br>
