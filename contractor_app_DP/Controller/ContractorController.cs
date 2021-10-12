@@ -1,12 +1,13 @@
 ﻿using contractor_app_DP.Classes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace contractor_app_DP.Controller
 {
@@ -21,61 +22,34 @@ namespace contractor_app_DP.Controller
             _configuration = configuration;
         }
         [HttpGet]
-        public JsonResult Get()
+        public string Get()
         {
-            string query = @"select ContractorId,FirstName,Surname,REGON,NIP,ContactNumber,Country,City,Street,HomeNumber,PostalCode from dbo.Contractors";
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("ContrahentAppCon");
-            SqlDataReader reader;
-            using (SqlConnection mycon = new SqlConnection(sqlDataSource))
+    
+            var settings = new JsonSerializerSettings()
             {
-                mycon.Open();
-                using (SqlCommand sqlCommand = new SqlCommand(query, mycon))
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                Error = (sender, args) =>
                 {
-                    reader = sqlCommand.ExecuteReader();
-                    table.Load(reader);
+                    args.ErrorContext.Handled = true;
+                },
+            };
 
-                    reader.Close();
-                    mycon.Close();
-                }
+            using (var context = new ContractortDbContext())
+            {
+                var myEntity = context.Contractors.ToList();
+                return JsonConvert.SerializeObject(myEntity, settings);
             }
-            return new JsonResult(table);
+           
         }
 
         [HttpPost]
         public JsonResult Post(RegisterModel con)
         {
-
-            String contractorQuery = "INSERT INTO dbo.Contractors (FirstName,Surname,REGON,NIP,ContactNumber,Country,City,Street,HomeNumber,PostalCode) VALUES (@FN,@SN,@Regon, @Nip,@CN,@Country,@City,@Street,@HN,@PC)";
-            
-
-
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("ContrahentAppCon");
-            SqlDataReader reader;
-            using (SqlConnection mycon = new SqlConnection(sqlDataSource))
+            using (var context = new ContractortDbContext())
             {
-                mycon.Open();
-
-                using (SqlCommand sqlCommand = new SqlCommand(contractorQuery, mycon))
-                {
-                    sqlCommand.Parameters.AddWithValue("@FN", con.FirstName);
-                    sqlCommand.Parameters.AddWithValue("@SN", con.Surname);
-                    sqlCommand.Parameters.AddWithValue("@Regon", con.REGON);
-                    sqlCommand.Parameters.AddWithValue("@Nip", con.NIP);
-                    sqlCommand.Parameters.AddWithValue("@CN", con.ContactNumber);
-                    sqlCommand.Parameters.AddWithValue("@Country", con.Country);
-                    sqlCommand.Parameters.AddWithValue("@City", con.City);
-                    sqlCommand.Parameters.AddWithValue("@Street", con.Street);
-                    sqlCommand.Parameters.AddWithValue("@HN", con.HomeNumber);
-                    sqlCommand.Parameters.AddWithValue("@PC", con.PostalCode);
-                    reader = sqlCommand.ExecuteReader();
-                    table.Load(reader);
-
-                    reader.Close();
-                    mycon.Close();
-                }
-
+                
+                context.Contractors.Add(con);
+                context.SaveChanges();
             }
 
             return new JsonResult("Dodano nowy rekord");
@@ -86,64 +60,29 @@ namespace contractor_app_DP.Controller
         public JsonResult Put(RegisterModel con)
         {
 
-            String query = @"update dbo.Contractors set FirstName = @FN,Surname = @SN,REGON= @Regon,NIP=@Nip,ContactNumber = @CN, Country=@Country,City=@City,Street=@Street,PostalCode=@PC,HomeNumber=@HN where ContractorId = " + con.ContractorId + @"";
 
-
-
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("ContrahentAppCon");
-            SqlDataReader reader;
-            using (SqlConnection mycon = new SqlConnection(sqlDataSource))
+            using (var context = new ContractortDbContext())
             {
-                mycon.Open();
-                using (SqlCommand sqlCommand = new SqlCommand(query, mycon))
-                {
-                    sqlCommand.Parameters.AddWithValue("@FN", con.FirstName);
-                    sqlCommand.Parameters.AddWithValue("@SN", con.Surname);
-                    sqlCommand.Parameters.AddWithValue("@Regon", con.REGON);
-                    sqlCommand.Parameters.AddWithValue("@Nip", con.NIP);
-                    sqlCommand.Parameters.AddWithValue("@CN", con.ContactNumber);
-                    sqlCommand.Parameters.AddWithValue("@Country", con.Country);
-                    sqlCommand.Parameters.AddWithValue("@City", con.City);
-                    sqlCommand.Parameters.AddWithValue("@Street", con.Street);
-                    sqlCommand.Parameters.AddWithValue("@HN", con.HomeNumber);
-                    sqlCommand.Parameters.AddWithValue("@PC", con.PostalCode);
-                    reader = sqlCommand.ExecuteReader();
-                    table.Load(reader);
 
-                    reader.Close();
-                    mycon.Close();
-                }
+                context.Contractors.Update(con);
+                context.SaveChanges();
             }
+          
 
-            return new JsonResult("Rekord zaktualizowany");
+            return new JsonResult("Rekord z id "+con.ContractorId+ " zaktualizowany");
         }
 
         [HttpDelete("{id}")]
         public JsonResult Delete(int id)
         {
-
-            String query = @"delete from dbo.Contractors where ContractorId=" + id + @"";
-
-
-
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("ContrahentAppCon");
-            SqlDataReader reader;
-            using (SqlConnection mycon = new SqlConnection(sqlDataSource))
+            using (var context = new ContractortDbContext())
             {
-                mycon.Open();
-                using (SqlCommand sqlCommand = new SqlCommand(query, mycon))
-                {
-                    reader = sqlCommand.ExecuteReader();
-                    table.Load(reader);
-
-                    reader.Close();
-                    mycon.Close();
-                }
+                var ContractorToRemove = context.Contractors.Where(x => x.ContractorId == id).FirstOrDefault();
+                context.Contractors.Remove(ContractorToRemove);
+                context.SaveChanges();
             }
 
-            return new JsonResult("Rekord usunięty");
+            return new JsonResult("Rekord z id " + id+ " usunięty");
         }
 
 
